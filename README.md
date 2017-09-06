@@ -1,7 +1,8 @@
 ## PostCard Application
 
 
-## coming soon[LIVE DEMO!!!]()
+## coming soon 
+[LIVE DEMO!!!]()
 
 ## Purpose:
 With this application you will be aple to take pictures using your webcam
