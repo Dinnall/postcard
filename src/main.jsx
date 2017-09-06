@@ -6,7 +6,6 @@ import $ from 'jquery';
 
 
 // CSS Styling
-
 const styles = {
   capture: {
     display: 'flex',
