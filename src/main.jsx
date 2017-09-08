@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Webcam from 'react-webcam';
 import {Component} from 'react'
 import $ from 'jquery';
 
@@ -14,179 +15,158 @@ const styles = {
   },
   picSize: {
     display: 'flex',
-    maxWidth: 340,
-    maxHeight: 340,
-    minWidth: 340,
-    minHeight: 340,
+    maxWidth: 450,
+    maxHeight: 450,
+    minWidth: 450,
+    minHeight: 450,
     margin: 30,
   },
   box: {
-    maxWidth: 340,
-    maxHeight: 340,
-    minWidth: 340,
-    minHeight: 340,
+    maxWidth: 350,
+    maxHeight: 350,
+    minWidth: 450,
+    minHeight: 450,
     border: '10px solid green',
   }
 }
 
-const Camera = (props) => {
-    return(
-      <div className="camera"
-    style={ styles.box }
-  >
-    <video id="video"
-      style={ styles.picSize }
-    ></video>
-    <button id="startbutton"
-      onClick={ props.handleStartClick }
-    >Take photo</button>
-  </div>
-    )
-}
+
+
+// Helper Functions/Component
 
 const Photo = (props) => {
     return(
         <div className="output"
             style={ styles.box }>
-           <img id="photo" alt="Your photo"
-              style={ styles.picSize } />
-              <button id="saveButton" onClick={ props.handleSaveClick }>Save Photo</button>
+           <img id="test" alt="Your photo"
+              style={ styles.picSize }
+              src={props.picture} 
+              />
          </div>
     )
 }
 
-//Components
-class Capture extends React.Component{
+// Components
+
+
+
+class EmailForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {  
-  constraints: { photo: null,audio: false, video: { width: 320, height: 320, startbutton:null } }
+    this.state = {
+      email: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({email: event.target.email});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    let c = document.getElementById("capturedPic");
+    let image = c.toDataURL();
+
+    $.ajax({
+      url: '/api/email',
+      method: 'POST',
+      data: {email: this.state.email, image: image}
+    })
+    .done((data) => {
+      console.log('data');
+    })
+    .fail((err) => {
+      console.log(err);
+    });
+ 
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Input email:
+          <textarea value={this.state.email} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+class WebcamCapture extends React.Component {
+  setRef = (webcam) => {
+    this.webcam = webcam;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      photo: null, text: "", audio: false, boxSize: { width: 450, height: 450 }
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+ 
+  capture = () => {
+    const imageSrc = this.webcam.getScreenshot()
+    let c = document.getElementById("capturedPic");
+    let ctx = c.getContext("2d");
+    var img = new Image();
+    c.width = 450;  
+    c.height = 450;
+    img.onload = ({path}) => ctx.drawImage(path[0], 10, 10);
+    img.src = imageSrc
   };
-    this.handleStartClick = this.handleStartClick.bind(this);  
-    this.takePicture = this.takePicture.bind(this);  
-    this.clearPhoto = this.clearPhoto.bind(this);  
-  }
-  componentDidMount(){
-    const constraints = this.state.constraints;  
-    console.log("CONSTRAINTS:",constraints)
-const getUserMedia = (params) => (  
-  new Promise((successCallback, errorCallback) => {
-    return navigator.webkitGetUserMedia.call(navigator, params, successCallback, errorCallback);
-  })
-);
 
-getUserMedia(constraints)  
-.then((stream) => {
-  const video = document.querySelector('video');
-  const vendorURL = window.URL || window.webkitURL;
-
-  video.src = vendorURL.createObjectURL(stream);
-  video.play();
-})
-.catch((err) => {
-  console.log(err);
-});
-
-this.clearPhoto(); 
-  }
-
-clearPhoto(){
-      const canvas = document.querySelector('canvas');  
-      const photo = document.getElementById('photo');  
-      const context = canvas.getContext('2d');  
-      const { width, height } = this.state.constraints.video;  
-      context.fillStyle = '#FFF';  
-      context.fillRect(0, 0, width, height);
-
-      const data = canvas.toDataURL('image/png');  
-      photo.setAttribute('src', data); 
-    }
-
-handleStartClick(event){
-    event.preventDefault();  
-    this.takePicture();  
-    }
-
-takePicture(){
-    const canvas = document.querySelector('canvas');  
-    const context = canvas.getContext('2d');  
-    const video = document.querySelector('video');  
-    const photo = document.getElementById('photo');  
-    const { width, height } = this.state.constraints.video;
-    const startbutton = document.getElementById('startbutton');
-  
-     let streaming = false;
-
-    canvas.width = width;  
-    canvas.height = height;  
-    context.drawImage(video, 0, 0, width, height);
-
-    const data = canvas.toDataURL('image/png'); 
-    console.log("PHOTO:",photo) 
-    photo.setAttribute('src', data);  
+  handleChange(e) {
+    let text = e.target.value;
+    let c = document.getElementById("capturedPic");
+    let ctx = c.getContext("2d");
+    ctx.font = "40pt Calibri";
+    ctx.fillText(text, 40, 40);
+    this.setState({text: text});
+  } 
 
 
-    navigator.getMedia = ( navigator.getUserMedia ||
-                           navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia ||
-                           navigator.msGetUserMedia);
 
-    navigator.getMedia(
-      {
-        video: true,
-        audio: false
-      },
-      function(stream) {
-        if (navigator.mozGetUserMedia) {
-          video.mozSrcObject = stream;
-        } else {
-          var vendorURL = window.URL || window.webkitURL;
-          video.src = vendorURL.createObjectURL(stream);
-        }
-        video.play();
-      },
-      function(err) {
-        console.log("An error occured! " + err);
-      }
-    )
-console.log("VIDEO:",video)
-    video.addEventListener('canplay', function(ev){
-    video.setAttribute('width', width);
-    video.setAttribute('height', height);
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
-    streaming = true;
 
-   
-    }, false);
-console.log("Start Button:",startbutton)
+  render() {
 
-startbutton.addEventListener('click', function(event){
-      event.preventDefault();
-      this.takePicture();
-      console.log("Taking pictures:",this.takePicture())
-    }, false);
-    
-  this.clearPhoto();
-  }
-render(){
-    return (  
-      <div className="capture"
-        style={ styles.capture }
-      >
-        <Camera
-          handleStartClick={ this.handleStartClick }
+    return (
+      <div>
+
+
+        <div className="liveCam" >
+          <Webcam
+          audio={false}
+          height={450}
+          ref={this.setRef}
+          screenshotFormat="image/jpeg"
+          width={450}
         />
-        <canvas id="canvas"
-          style={ styles.picSize }
-          hidden
-        ></canvas>
-        <Photo />
+        <button className="CaptureBotton" onClick={this.capture}>Capture photo</button>
+         </div>
+
+
+      
+        <div id="test">
+              <textarea value={this.state.text} onChange={this.handleChange} />
+              <canvas id="capturedPic"></canvas>
+        </div>
+
+        <EmailForm />
+
       </div>
+
     );
   }
 }
 ReactDOM.render(
-  <Capture />,
+  <WebcamCapture />,
   document.getElementById('root')
 );

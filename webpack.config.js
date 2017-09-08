@@ -1,12 +1,13 @@
+const path = require("path");
+
 module.exports = {
  entry: [
    './src/main.jsx'
  ],
  target: 'web',
  output: {
-   path: __dirname,
-   publicPath: '/',
-   filename: 'bundle.js'
+  path: path.join(__dirname, '/public'),
+  filename: "bundle.js"
  },
  module: {
    loaders: [
