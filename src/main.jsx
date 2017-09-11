@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Webcam from 'react-webcam';
 import {Component} from 'react'
 import $ from 'jquery';
+import '../src/main.css'; 
 
 
 
@@ -26,7 +27,7 @@ const styles = {
     maxHeight: 350,
     minWidth: 450,
     minHeight: 450,
-    border: '10px solid green',
+    border: '10px solid gray',
   }
 }
 
@@ -48,8 +49,6 @@ const Photo = (props) => {
 
 // Components
 
-
-
 class EmailForm extends React.Component {
   constructor(props) {
     super(props);
@@ -62,14 +61,13 @@ class EmailForm extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({email: event.target.email});
+    this.setState({email: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
     let c = document.getElementById("capturedPic");
     let image = c.toDataURL();
-
     $.ajax({
       url: '/api/email',
       method: 'POST',
@@ -85,11 +83,12 @@ class EmailForm extends React.Component {
   }
 
   render() {
+console.log("Email:",this.state.email)
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Input email:
-          <textarea value={this.state.email} onChange={this.handleChange} />
+           Email address to receive image:
+          <textarea onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -139,7 +138,12 @@ class WebcamCapture extends React.Component {
 
     return (
       <div>
+           <h1>Make a Postcard using your webcam</h1>
 
+         <h3> How to use application:</h3>
+         <p> Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton</p>
+         <p> Your image will be rendered.Once you have your desired image you can write a short message on your picture</p>
+         <p> Enter a email address to send your postcard then hit submit!</p>
 
         <div className="liveCam" >
           <Webcam
@@ -149,14 +153,18 @@ class WebcamCapture extends React.Component {
           screenshotFormat="image/jpeg"
           width={450}
         />
-        <button className="CaptureBotton" onClick={this.capture}>Capture photo</button>
+        <button className="cambutton" onClick={this.capture}>Capture photo</button>
          </div>
+    
 
 
-      
-        <div id="test">
+        <div style={ styles.box }>
+
+              <label>
+               Postcard Message:
               <textarea value={this.state.text} onChange={this.handleChange} />
               <canvas id="capturedPic"></canvas>
+              </label>
         </div>
 
         <EmailForm />

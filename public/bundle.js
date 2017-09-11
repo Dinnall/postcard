@@ -9785,6 +9785,8 @@ var _jquery = __webpack_require__(186);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+__webpack_require__(187);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9813,7 +9815,7 @@ var styles = {
     maxHeight: 350,
     minWidth: 450,
     minHeight: 450,
-    border: '10px solid green'
+    border: '10px solid gray'
   }
 
   // Helper Functions/Component
@@ -9831,7 +9833,6 @@ var styles = {
 };
 
 // Components
-
 
 var EmailForm = function (_React$Component) {
   _inherits(EmailForm, _React$Component);
@@ -9853,7 +9854,7 @@ var EmailForm = function (_React$Component) {
   _createClass(EmailForm, [{
     key: 'handleChange',
     value: function handleChange(event) {
-      this.setState({ email: event.target.email });
+      this.setState({ email: event.target.value });
     }
   }, {
     key: 'handleSubmit',
@@ -9861,7 +9862,6 @@ var EmailForm = function (_React$Component) {
       event.preventDefault();
       var c = document.getElementById("capturedPic");
       var image = c.toDataURL();
-
       _jquery2.default.ajax({
         url: '/api/email',
         method: 'POST',
@@ -9875,14 +9875,15 @@ var EmailForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log("Email:", this.state.email);
       return _react2.default.createElement(
         'form',
         { onSubmit: this.handleSubmit },
         _react2.default.createElement(
           'label',
           null,
-          'Input email:',
-          _react2.default.createElement('textarea', { value: this.state.email, onChange: this.handleChange })
+          'Email address to receive image:',
+          _react2.default.createElement('textarea', { onChange: this.handleChange })
         ),
         _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
       );
@@ -9944,6 +9945,31 @@ var WebcamCapture = function (_React$Component2) {
         'div',
         null,
         _react2.default.createElement(
+          'h1',
+          null,
+          'Make a Postcard using your webcam'
+        ),
+        _react2.default.createElement(
+          'h3',
+          null,
+          ' How to use application:'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' Your image will be rendered.Once you have your desired image you can write a short message on your picture'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' Enter a email address to send your postcard then hit submit!'
+        ),
+        _react2.default.createElement(
           'div',
           { className: 'liveCam' },
           _react2.default.createElement(_reactWebcam2.default, {
@@ -9955,15 +9981,20 @@ var WebcamCapture = function (_React$Component2) {
           }),
           _react2.default.createElement(
             'button',
-            { className: 'CaptureBotton', onClick: this.capture },
+            { className: 'cambutton', onClick: this.capture },
             'Capture photo'
           )
         ),
         _react2.default.createElement(
           'div',
-          { id: 'test' },
-          _react2.default.createElement('textarea', { value: this.state.text, onChange: this.handleChange }),
-          _react2.default.createElement('canvas', { id: 'capturedPic' })
+          { style: styles.box },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Postcard Message:',
+            _react2.default.createElement('textarea', { value: this.state.text, onChange: this.handleChange }),
+            _react2.default.createElement('canvas', { id: 'capturedPic' })
+          )
         ),
         _react2.default.createElement(EmailForm, null)
       );
@@ -34007,6 +34038,43 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*.CaptureBotton{
+  border-radius: 5px;
+  padding: 15px 25px;
+  font-size: 22px;
+  text-decoration: none;
+  margin: 20px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}*/
+
+/*.cambutton{
+  border: 0 solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+  outline: 1px solid;
+  outline-color: rgba(255, 255, 255, .5);
+  outline-offset: 0px;
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
+
+.cambutton:hover {
+  border: 1px solid;
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+  outline-color: rgba(255, 255, 255, 0);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #427388; 
+}*/
 
 
 /***/ })
