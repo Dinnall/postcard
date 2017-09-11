@@ -9,8 +9,11 @@ With this application you will be aple to take pictures using your webcam
 write a message on your picture then send it as an email 
 
 Start the app by following these steps.
+After Cloning this repo 
 
 `npm install`
+
+
 `npm start`
 
 ### View Implementation:
