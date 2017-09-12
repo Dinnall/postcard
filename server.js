@@ -5,7 +5,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const inlineBase64 = require('nodemailer-plugin-inline-base64');
-
+// inlineBase64 - convert base64 an actual image for email attachments
 
 /////
 const jsonParser = bodyParser.json({limit:1024*1024*20, type:'application/json'});

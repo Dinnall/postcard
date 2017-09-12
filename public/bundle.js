@@ -9946,29 +9946,24 @@ var WebcamCapture = function (_React$Component2) {
         null,
         _react2.default.createElement(
           'h2',
-          null,
+          { className: 'AppTitle' },
           'Make a Postcard using your webcam'
         ),
         _react2.default.createElement(
           'div',
           { className: 'instructions' },
           _react2.default.createElement(
-            'h3',
-            null,
-            ' How to use application:'
-          ),
-          _react2.default.createElement(
-            'p',
+            'li',
             null,
             ' Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton'
           ),
           _react2.default.createElement(
-            'p',
+            'li',
             null,
             ' Your image will be rendered.Once you have your desired image you can write a short message on your picture'
           ),
           _react2.default.createElement(
-            'p',
+            'li',
             null,
             ' Enter a email address to send your postcard then hit submit!'
           )
@@ -9984,8 +9979,7 @@ var WebcamCapture = function (_React$Component2) {
               height: 450,
               ref: this.setRef,
               screenshotFormat: 'image/jpeg',
-              width: 450
-            }),
+              width: 450 }),
             _react2.default.createElement(
               'button',
               { className: 'cambutton', onClick: this.capture },
@@ -34088,7 +34082,7 @@ exports = module.exports = __webpack_require__(189)(undefined);
 
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: 'Arial',sans-serif;\n  font-size: 16px;\n  background-color: #FEF0E4;\n}\n\n.CaptureBotton{\n  border-radius: 5px;\n  padding: 15px 25px;\n  font-size: 22px;\n  text-decoration: none;\n  margin: 20px;\n  color: #fff;\n  position: relative;\n  display: inline-block;\n}\n\n\n\n.cambutton {\n  display: flex;\n  align-items: flex-start;\n  padding:10px 30px;\n  outline: none;\n  background-color: #FF5A5F;\n  border: none;\n  border-radius:5px;\n  box-shadow: 0 9px #95a5a6;\n}\n\n.cambutton:hover{\n  background-color: #DE4083; \n}\n\n.cambutton:active {\n  background-color: #2ecc71;\n  box-shadow: 0 5px #95a5a6;\n  transform: translateY(4px);\n}\n\n.instructions{\n  display: flex;\n  align-content: center;\n\n}\n\n.submitform{\n  display: flex;\n  justify-content: flex-start;\n}\n\n.submitEmail{\n  display: flex;\n  align-content: flex-end;\n  width: 80%;\n  border-left: 1px solid #FAFAFA;\n  font-size: 1.2em;\n}\n\n.liveCam{\n  display: flex;\n  flex-direction: row;\n  align-content:  flex-start;\n  justify-content: flex-start;\n}\n\n\n.mainApp{\n  display: flex;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  margin: 0;\n  padding: 0;\n  font-family: 'Arial',sans-serif;\n  font-size: 16px;\n  background-color: #FEF0E4;\n}\n\n.AppTitle{\n  display: flex;\n  align-content: center;\n  padding: 15px 25px;\n  position: relative;\n  top: 20px;\n}\n\n.CaptureBotton{\n  border-radius: 5px;\n  padding: 15px 25px;\n  font-size: 16px;\n  text-decoration: none;\n  margin: 20px;\n  color: #fff;\n  position: relative;\n  display: inline-block;\n}\n\n\n\n.cambutton {\n  display: flex;\n  align-items: flex-start;\n  font-size: 20px;\n  padding:10px 30px;\n  outline: none;\n  background-color: #FF5A5F;\n  border: none;\n  border-radius:5px;\n  box-shadow: 0 9px #95a5a6;\n}\n\n.cambutton:hover{\n  background-color: #DE4083; \n}\n\n.cambutton:active {\n  background-color: #2ecc71;\n  box-shadow: 0 5px #95a5a6;\n  transform: translateY(3px);\n}\n\n.instructions{\n  display: flex;\n  align-content: center;\n\n}\n\n.submitform{\n  display: flex;\n  justify-content: flex-start;\n}\n\n.submitEmail{\n  display: flex;\n  align-content: flex-end;\n  width: 80%;\n  border-left: 1px solid #FAFAFA;\n  font-size: 1.2em;\n}\n\n.liveCam{\n  display: flex;\n  flex-direction: row;\n  align-content:  flex-start;\n  justify-content: flex-start;\n}\n\n\n.mainApp{\n  display: flex;\n}\n", ""]);
 
 // exports
 

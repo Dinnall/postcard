@@ -137,39 +137,33 @@ class WebcamCapture extends React.Component {
   render() {
 
     return (
+
       <div>
-         <h2>Make a Postcard using your webcam</h2>
+         <h2 className="AppTitle">Make a Postcard using your webcam</h2>
           <div className="instructions">
-         <h3> How to use application:</h3>
-         <p> Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton</p>
-         <p> Your image will be rendered.Once you have your desired image you can write a short message on your picture</p>
-         <p> Enter a email address to send your postcard then hit submit!</p>
+             <li> Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton</li>
+             <li> Your image will be rendered.Once you have your desired image you can write a short message on your picture</li>
+             <li> Enter a email address to send your postcard then hit submit!</li>
           </div>
         <div className="mainApp">
-        <div className="liveCam" >
-          <Webcam 
-          audio={false}
-          height={450}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={450}
-        />
-        <button className="cambutton" onClick={this.capture}>Capture photo</button>
+            <div className="liveCam" >
+              <Webcam 
+                audio={false}
+                height={450}
+                ref={this.setRef}
+                screenshotFormat="image/jpeg"
+                width={450}/>
+              <button className="cambutton" onClick={this.capture}>Capture photo</button>
          </div>
-    
-
-
         <div className="camImage">
-
-              <label>
+             <label>
                Postcard Message:
-              <textarea value={this.state.text} onChange={this.handleChange} />
-              <canvas id="capturedPic"></canvas>
+                <textarea value={this.state.text} onChange={this.handleChange} />
+                <canvas id="capturedPic"></canvas>
               </label>
         </div>
-
         </div>
-        <EmailForm className="submitform"/>
+          <EmailForm className="submitform"/>
       </div>
 
     );

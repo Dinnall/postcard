@@ -7,10 +7,18 @@ body {
   background-color: #FEF0E4;
 }
 
+.AppTitle{
+  display: flex;
+  align-content: center;
+  padding: 15px 25px;
+  position: relative;
+  top: 20px;
+}
+
 .CaptureBotton{
   border-radius: 5px;
   padding: 15px 25px;
-  font-size: 22px;
+  font-size: 16px;
   text-decoration: none;
   margin: 20px;
   color: #fff;
@@ -23,6 +31,7 @@ body {
 .cambutton {
   display: flex;
   align-items: flex-start;
+  font-size: 20px;
   padding:10px 30px;
   outline: none;
   background-color: #FF5A5F;
@@ -38,7 +47,7 @@ body {
 .cambutton:active {
   background-color: #2ecc71;
   box-shadow: 0 5px #95a5a6;
-  transform: translateY(4px);
+  transform: translateY(3px);
 }
 
 .instructions{
