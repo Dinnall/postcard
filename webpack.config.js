@@ -18,6 +18,14 @@ module.exports = {
          presets: ['react', 'es2015', 'stage-1']
        },
      },
+    {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        loader: 'file'
+      }
    ]
  },
  resolve: {

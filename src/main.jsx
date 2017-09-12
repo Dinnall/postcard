@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Webcam from 'react-webcam';
 import {Component} from 'react'
 import $ from 'jquery';
-import '../src/main.css'; 
+import './main.css'; 
 
 
 
@@ -85,13 +85,13 @@ class EmailForm extends React.Component {
   render() {
 console.log("Email:",this.state.email)
     return (
+      <div className="submitEmail">
       <form onSubmit={this.handleSubmit}>
-        <label>
-           Email address to receive image:
+          Email address to receive image:
           <textarea onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" />
       </form>
+      </div>
     );
   }
 }
@@ -138,15 +138,16 @@ class WebcamCapture extends React.Component {
 
     return (
       <div>
-           <h1>Make a Postcard using your webcam</h1>
-
+         <h2>Make a Postcard using your webcam</h2>
+          <div className="instructions">
          <h3> How to use application:</h3>
          <p> Once webcam is loaded, strike a desired pose then click the "Captured Photobutton" botton</p>
          <p> Your image will be rendered.Once you have your desired image you can write a short message on your picture</p>
          <p> Enter a email address to send your postcard then hit submit!</p>
-
+          </div>
+        <div className="mainApp">
         <div className="liveCam" >
-          <Webcam
+          <Webcam 
           audio={false}
           height={450}
           ref={this.setRef}
@@ -158,7 +159,7 @@ class WebcamCapture extends React.Component {
     
 
 
-        <div style={ styles.box }>
+        <div className="camImage">
 
               <label>
                Postcard Message:
@@ -167,8 +168,8 @@ class WebcamCapture extends React.Component {
               </label>
         </div>
 
-        <EmailForm />
-
+        </div>
+        <EmailForm className="submitform"/>
       </div>
 
     );
